@@ -1,11 +1,81 @@
-For this project, I worked on developing and deploying a web scraper to collect data from a utility website and automate its execution using AWS services. The project involved building a web scraper, containerizing it with Docker, and deploying it to AWS Lambda so it could run automatically on a schedule. The goal was to gain experience with cloud automation and serverless computing while ensuring the scraper continuously collects and stores data in Amazon S3.
+# ⚡ Power Outage Web Scraper
 
-The first step was setting up my AWS environment, which involved creating an IAM role to securely access AWS resources and storing credentials for authentication. Then, I set up an S3 bucket, which serves as the final storage location for the scraper’s output in CSV format. To manage and deploy the containerized scraper, I created an Amazon ECR (Elastic Container Registry) repository, where the Docker image of my scraper would be stored.
+This project is a cloud-deployed, containerized web scraper that collects power outage data from the **Jackson EMC Outage Map** and stores it in an **AWS S3 bucket** on a recurring schedule.
 
-With the cloud infrastructure in place, I proceeded to implement the scraper in the provided codebase. The scraper was designed to extract outage data from the Jackson EMC Outage Map and process it into a structured format. Once the implementation was complete, I built a Docker image of the scraper and pushed it to the ECR repository.
+It was built to explore **cloud automation**, **serverless architecture**, and **data collection pipelines** using **Docker**, **AWS Lambda**, **ECR**, and **EventBridge**.
 
-After the image was stored in ECR, I created an AWS Lambda function that pulls the Docker image and executes the scraper on demand. To automate this process, I configured Amazon EventBridge to trigger the Lambda function every 15 minutes, ensuring that the scraper runs on a scheduled basis without manual intervention.
+---
 
-Finally, I tested the function and verified that the CSV files were correctly stored in S3 after each execution. The final deliverable for the assignment was a screenshot of the CSV file inside the S3 bucket, confirming that the scraper successfully collected and stored data as expected.
+## 🚀 Project Highlights
 
-Through this project, I gained hands-on experience in deploying a containerized web scraper on AWS, automating workflows with EventBridge, and debugging deployment issues related to Lambda, Docker, and ECR. This workflow can be extended for other automated data collection tasks, making it a scalable solution for cloud-based web scraping.
+- 🕸️ Scrapes real-time outage data from Jackson EMC
+- 🐳 Containerized using Docker
+- ☁️ Deployed to AWS Lambda via Amazon ECR
+- 🔁 Triggered automatically every 15 minutes with EventBridge
+- 💾 Stores structured CSV data in Amazon S3
+
+---
+
+## 🛠️ Technologies Used
+
+- Python
+- Selenium
+- Docker
+- AWS Lambda
+- Amazon S3
+- Amazon ECR
+- EventBridge
+
+---
+
+## 🧱 Architecture
+
+```text
+[Jackson EMC Website]
+        ↓
+     [Scraper]
+        ↓
+     [Docker]
+        ↓
+     [ECR Repo] ──> [AWS Lambda] ⇨ [S3 Bucket]
+                           ▲
+                    [EventBridge Scheduler]
+```
+
+---
+
+## 📁 Repository Structure
+
+```
+main.py               # Web scraping logic
+Dockerfile            # Docker container configuration
+requirements.txt      # Python dependencies
+README.md             # Project documentation
+```
+
+---
+
+## ⚙️ How It Works
+
+1. **Web Scraper**:
+   - Extracts outage data from the Jackson EMC website using Selenium
+   - Outputs data as a structured CSV
+
+2. **Docker & AWS Deployment**:
+   - Scraper is containerized using Docker
+   - Image is pushed to Amazon ECR
+
+3. **Lambda Execution**:
+   - AWS Lambda pulls the Docker image and runs the scraper
+   - Data is written to a predefined S3 bucket
+
+4. **Automation**:
+   - Amazon EventBridge triggers Lambda every 15 minutes
+
+---
+
+## ✅ Outcomes
+
+- Automated data scraping pipeline that runs without manual intervention
+- Scalable architecture for real-time utility data monitoring
+- Hands-on experience with AWS serverless tools and deployment strategies
